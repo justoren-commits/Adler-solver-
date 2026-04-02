@@ -2,504 +2,406 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>כדור אדלר</title>
-
-<!-- PWA / Home Screen -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>אדלר אומר</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="כדור אדלר">
+<meta name="apple-mobile-web-app-title" content="אדלר אומר">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="application-name" content="כדור אדלר">
-<meta name="theme-color" content="#0e0c1a">
-<meta name="description" content="חוכמת פסיכולוגיה אינדיבידואלית לכל שאלה">
+<meta name="theme-color" content="#f0c020">
 
-<!-- Inline SVG icon as data URI for Apple Touch Icon -->
-<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiBmaWxsPSIjMGUwYzFhIi8+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iNjUiIGZpbGw9InVybCgjYmcpIiBzdHJva2U9IiNjOWE4NGMiIHN0cm9rZS13aWR0aD0iMiIvPjxwb2x5Z29uIHBvaW50cz0iOTAsMzggMTMyLDExMyA0OCwxMTMiIGZpbGw9InJnYmEoMjAxLDE2OCw3NiwwLjEpIiBzdHJva2U9IiNjOWE4NGMiIHN0cm9rZS13aWR0aD0iMS41Ii8+PHRleHQgeD0iOTAiIHk9Ijk4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI4IiBmaWxsPSIjZjBkMDgwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPtAlPC90ZXh0PjxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iYmciIGN4PSI0MCUiIGN5PSIzNSUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyYTIzNGEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwYTA4MTYiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48L3N2Zz4=">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiBmaWxsPSIjMGUwYzFhIi8+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iNjUiIGZpbGw9InVybCgjYmcpIiBzdHJva2U9IiNjOWE4NGMiIHN0cm9rZS13aWR0aD0iMiIvPjxwb2x5Z29uIHBvaW50cz0iOTAsMzggMTMyLDExMyA0OCwxMTMiIGZpbGw9InJnYmEoMjAxLDE2OCw3NiwwLjEpIiBzdHJva2U9IiNjOWE4NGMiIHN0cm9rZS13aWR0aD0iMS41Ii8+PHRleHQgeD0iOTAiIHk9Ijk4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI4IiBmaWxsPSIjZjBkMDgwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPtAlPC90ZXh0PjxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iYmciIGN4PSI0MCUiIGN5PSIzNSUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyYTIzNGEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwYTA4MTYiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48L3N2Zz4=">
-<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700;900&family=Heebo:wght@400;700;900&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --bg: #0e0c1a;
-    --surface: #16132b;
-    --gold: #c9a84c;
-    --gold-light: #f0d080;
-    --cream: #f5efe0;
-    --muted: #7a7090;
-    --glow: rgba(201,168,76,0.25);
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --yellow: #f0c020;
+  --yellow-dark: #c9a000;
+  --black: #111111;
+  --white: #fffdf0;
+}
 
-  body {
-    background: var(--bg);
-    color: var(--cream);
-    font-family: 'Heebo', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-    overflow-x: hidden;
-  }
+html, body {
+  height: 100%;
+  overscroll-behavior: none;
+}
 
-  /* Starfield background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 45% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,0.35) 0%, transparent 100%),
-      radial-gradient(1px 1px at 85% 75%, rgba(255,255,255,0.25) 0%, transparent 100%),
-      radial-gradient(1px 1px at 30% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(2px 2px at 55% 40%, rgba(201,168,76,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 92% 35%, rgba(255,255,255,0.2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 8% 65%, rgba(255,255,255,0.25) 0%, transparent 100%);
-    pointer-events: none;
-    z-index: 0;
-  }
+body {
+  background: var(--yellow);
+  color: var(--black);
+  font-family: 'Heebo', sans-serif;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  /* grain texture */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+}
 
-  .container {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-  }
+.app {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: max(32px, env(safe-area-inset-bottom));
+}
 
-  /* Header */
-  .header {
-    text-align: center;
-  }
+/* ── HEADER ── */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 24px 0;
+  position: relative;
+}
 
-  .header h1 {
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: clamp(2rem, 6vw, 3rem);
-    font-weight: 900;
-    color: var(--gold-light);
-    letter-spacing: 0.02em;
-    line-height: 1.1;
-    text-shadow: 0 0 40px var(--glow);
-  }
+.adler-img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  filter: contrast(1.1) brightness(0.95);
+  transform-origin: bottom center;
+}
 
-  .header p {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-top: 6px;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-  }
+@keyframes think {
+  0%   { transform: rotate(0deg); }
+  15%  { transform: rotate(-7deg); }
+  35%  { transform: rotate(6deg); }
+  55%  { transform: rotate(-5deg); }
+  75%  { transform: rotate(4deg); }
+  90%  { transform: rotate(-2deg); }
+  100% { transform: rotate(0deg); }
+}
 
-  /* The Ball */
-  .ball-wrap {
-    position: relative;
-    width: 220px;
-    height: 220px;
-    cursor: pointer;
-    transition: transform 0.15s ease;
-  }
+.adler-img.thinking {
+  animation: think 0.75s ease-in-out infinite;
+}
 
-  .ball-wrap:active { transform: scale(0.95); }
+.title-block {
+  width: 100%;
+  background: var(--black);
+  margin-top: 12px;
+  padding: 10px 20px;
+  text-align: center;
+}
 
-  .ball {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(circle at 38% 35%,
-      #2a234a 0%,
-      #16132b 45%,
-      #0a0816 100%
-    );
-    box-shadow:
-      0 0 60px rgba(201,168,76,0.2),
-      0 0 120px rgba(201,168,76,0.08),
-      inset 0 -4px 20px rgba(0,0,0,0.6),
-      inset 0 4px 15px rgba(255,255,255,0.06);
-    position: relative;
-    overflow: hidden;
-    transition: box-shadow 0.5s ease;
-  }
+.title-block h1 {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--yellow);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
 
-  .ball.glowing {
-    box-shadow:
-      0 0 80px rgba(201,168,76,0.5),
-      0 0 160px rgba(201,168,76,0.2),
-      inset 0 -4px 20px rgba(0,0,0,0.6),
-      inset 0 4px 15px rgba(255,255,255,0.06);
-  }
+.title-block p {
+  font-size: 0.65rem;
+  color: rgba(240,192,32,0.55);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  font-weight: 700;
+}
 
-  /* Shine */
-  .ball::after {
-    content: '';
-    position: absolute;
-    top: 18%;
-    left: 22%;
-    width: 35%;
-    height: 22%;
-    background: radial-gradient(ellipse, rgba(255,255,255,0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    transform: rotate(-25deg);
-  }
+/* ── INPUT ── */
+.input-area {
+  padding: 24px 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
-  /* Triangle/Window inside ball */
-  .ball-inner {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.input-label {
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--black);
+  opacity: 0.55;
+}
 
-  .ball-symbol {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
+textarea {
+  width: 100%;
+  background: rgba(0,0,0,0.06);
+  border: 2.5px solid var(--black);
+  border-radius: 0;
+  padding: 14px 16px;
+  color: var(--black);
+  font-family: 'Heebo', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+  min-height: 100px;
+  direction: rtl;
+  transition: background 0.2s;
+  -webkit-appearance: none;
+  box-shadow: 4px 4px 0 var(--black);
+}
 
-  .ball-symbol svg {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 0 10px var(--gold));
-    transition: opacity 0.3s;
-  }
+textarea:focus {
+  background: rgba(0,0,0,0.09);
+}
 
-  .ball-symbol .ball-text {
-    position: absolute;
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: var(--gold-light);
-    text-align: center;
-    width: 50px;
-    line-height: 1.3;
-    letter-spacing: 0.03em;
-  }
+textarea::placeholder { color: rgba(0,0,0,0.3); }
 
-  /* Shake animation */
-  @keyframes shake {
-    0%   { transform: rotate(0deg) translateX(0); }
-    10%  { transform: rotate(-8deg) translateX(-4px); }
-    20%  { transform: rotate(8deg) translateX(4px); }
-    30%  { transform: rotate(-6deg) translateX(-3px); }
-    40%  { transform: rotate(6deg) translateX(3px); }
-    50%  { transform: rotate(-4deg) translateX(-2px); }
-    60%  { transform: rotate(4deg) translateX(2px); }
-    70%  { transform: rotate(-2deg) translateX(-1px); }
-    85%  { transform: rotate(2deg) translateX(1px); }
-    100% { transform: rotate(0deg) translateX(0); }
-  }
+.ask-btn {
+  width: 100%;
+  background: var(--black);
+  border: 2.5px solid var(--black);
+  padding: 15px 20px;
+  color: var(--yellow);
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: transform 0.1s, box-shadow 0.1s;
+  -webkit-appearance: none;
+  box-shadow: 4px 4px 0 var(--yellow-dark);
+}
 
-  .ball-wrap.shaking { animation: shake 0.7s ease-in-out; }
+.ask-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--yellow-dark);
+}
 
-  /* Answer bubble */
-  .answer-area {
-    width: 100%;
-    min-height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.ask-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
-  .answer-bubble {
-    background: var(--surface);
-    border: 1px solid rgba(201,168,76,0.25);
-    border-radius: 16px;
-    padding: 20px 24px;
-    width: 100%;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 4px 30px rgba(0,0,0,0.3);
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
+/* ── ANSWER ── */
+.answer-wrap {
+  padding: 20px 20px 0;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
 
-  .answer-bubble.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.answer-wrap.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 
-  .answer-bubble::before {
-    content: '';
-    position: absolute;
-    top: -1px; left: 50%; right: 0;
-    height: 2px;
-    width: 60px;
-    transform: translateX(-50%);
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    border-radius: 2px;
-  }
+.answer-card {
+  border: 2.5px solid var(--black);
+  background: var(--white);
+  box-shadow: 5px 5px 0 var(--black);
+  overflow: hidden;
+}
 
-  .answer-label {
-    font-size: 0.65rem;
-    color: var(--gold);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    font-weight: 500;
-  }
+.answer-header {
+  background: var(--black);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-  .answer-text {
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    line-height: 1.7;
-    color: var(--cream);
-  }
+.answer-header img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(10) saturate(0);
+}
 
-  .answer-principle {
-    margin-top: 10px;
-    font-size: 0.72rem;
-    color: var(--muted);
-    font-style: italic;
-    letter-spacing: 0.03em;
-  }
+.answer-header span {
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--yellow);
+}
 
-  /* Loading dots */
-  .loading-dots {
-    display: none;
-    gap: 6px;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0;
-  }
+.answer-body {
+  padding: 18px 16px 16px;
+}
 
-  .loading-dots.active { display: flex; }
+/* dots */
+.loading { display: none; justify-content: center; gap: 8px; padding: 10px 0; }
+.loading.active { display: flex; }
+.dot {
+  width: 9px; height: 9px;
+  background: var(--black);
+  border-radius: 50%;
+  animation: pulse 1s infinite;
+}
+.dot:nth-child(2) { animation-delay: 0.18s; }
+.dot:nth-child(3) { animation-delay: 0.36s; }
+@keyframes pulse {
+  0%,80%,100% { transform: scale(0.5); opacity: 0.2; }
+  40% { transform: scale(1); opacity: 1; }
+}
 
-  .dot {
-    width: 7px; height: 7px;
-    background: var(--gold);
-    border-radius: 50%;
-    animation: bounce 1s infinite;
-  }
+.answer-content { display: none; }
 
-  .dot:nth-child(2) { animation-delay: 0.15s; }
-  .dot:nth-child(3) { animation-delay: 0.3s; }
+.answer-text {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.85;
+  color: var(--black);
+  direction: rtl;
+}
 
-  @keyframes bounce {
-    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-    40%            { transform: scale(1); opacity: 1; }
-  }
+.answer-principle {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 2px solid var(--black);
+  font-size: 0.68rem;
+  color: var(--black);
+  opacity: 0.45;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
 
-  /* Input area */
-  .input-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .input-label {
-    font-size: 0.75rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    text-align: center;
-  }
-
-  textarea {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid rgba(201,168,76,0.2);
-    border-radius: 12px;
-    padding: 16px 18px;
-    color: var(--cream);
-    font-family: 'Heebo', sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    resize: none;
-    outline: none;
-    transition: border-color 0.3s;
-    min-height: 90px;
-    direction: rtl;
-  }
-
-  textarea:focus { border-color: rgba(201,168,76,0.5); }
-  textarea::placeholder { color: var(--muted); }
-
-  .ask-btn {
-    background: linear-gradient(135deg, #b8912a, #c9a84c, #e8c96a);
-    border: none;
-    border-radius: 12px;
-    padding: 14px 28px;
-    color: #1a1200;
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 0.04em;
-    transition: opacity 0.2s, transform 0.15s;
-    box-shadow: 0 4px 20px rgba(201,168,76,0.3);
-  }
-
-  .ask-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-  .ask-btn:active { transform: translateY(0); }
-  .ask-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
-  /* Footer */
-  .footer {
-    font-size: 0.65rem;
-    color: rgba(122,112,144,0.5);
-    text-align: center;
-    letter-spacing: 0.08em;
-    margin-top: 8px;
-  }
+.footer {
+  margin-top: auto;
+  padding: 28px 20px 0;
+  font-size: 0.58rem;
+  color: rgba(0,0,0,0.3);
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
 </style>
 </head>
 <body>
-
-<div class="container">
+<div class="app">
 
   <div class="header">
-    <h1>כדור אדלר</h1>
-    <p>חוכמת פסיכולוגיה אינדיבידואלית לכל שאלה</p>
+    <img class="adler-img" src="adler.png" alt="אדלר" onerror="this.style.display='none'">
+    <div class="title-block">
+      <h1>אדלר אומר!</h1>
+      <p>פסיכולוגיה אינדיבידואלית · 1870</p>
+    </div>
   </div>
 
-  <div class="ball-wrap" id="ballWrap" onclick="shakeBall()">
-    <div class="ball" id="ball">
-      <div class="ball-inner">
-        <div class="ball-symbol">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="40,8 72,65 8,65"
-              fill="rgba(201,168,76,0.08)"
-              stroke="rgba(201,168,76,0.7)"
-              stroke-width="1.5"/>
-          </svg>
-          <div class="ball-text">א</div>
+  <div class="input-area">
+    <div class="input-label">ספר לי מה קורה</div>
+    <textarea id="situation" placeholder="למשל: הילד שלי צועק בלי הפסקה, הבוס לא רואה אותי, אני תקוע..."></textarea>
+    <button class="ask-btn" id="askBtn" onclick="askAdler()">! אדלר, מה אתה אומר</button>
+  </div>
+
+  <div class="answer-wrap" id="answerWrap">
+    <div class="answer-card">
+      <div class="answer-header">
+        <img src="adler.png" alt="" onerror="this.style.display='none'">
+        <span>אדלר אומר</span>
+      </div>
+      <div class="answer-body">
+        <div class="loading" id="loadingDots">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+        <div class="answer-content" id="answerContent">
+          <div class="answer-text" id="answerText"></div>
+          <div class="answer-principle" id="answerPrinciple"></div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="answer-area">
-    <div class="answer-bubble" id="answerBubble">
-      <div class="loading-dots" id="loadingDots">
-        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-      </div>
-      <div id="answerContent">
-        <div class="answer-label">מה שואלים</div>
-        <div class="answer-text" id="answerText">כתוב סיטואציה ולחץ שאל</div>
-        <div class="answer-principle" id="answerPrinciple"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="input-section">
-    <div class="input-label">תאר את הסיטואציה שלך</div>
-    <textarea id="situation" placeholder="למשל: הבוס שלי לא מעריך את העבודה שלי ואני מרגיש תקוע..."></textarea>
-    <button class="ask-btn" id="askBtn" onclick="askAdler()">✦ שאל את אדלר</button>
-  </div>
-
-  <div class="footer">מבוסס על פסיכולוגיה אינדיבידואלית · אלפרד אדלר 1870–1937</div>
+  <div class="footer">לא תחליף לטיפול · אדלר היה אומר ללכת לפסיכולוג</div>
 
 </div>
-
 <script>
-const ADLER_SYSTEM = `You are an oracle inspired by Alfred Adler's Individual Psychology.
-The user describes a life situation in Hebrew. 
-You must respond with ONE short, meaningful insight in Hebrew (2-3 sentences max).
-The insight should feel like wisdom, not therapy — poetic and direct.
-Always end by citing one Adlerian principle briefly in italics format like: [עיקרון: ...]
+const RESPONSES = [
+  { text: "כל התנהגות היא בעלת מטרה. שאל את עצמך: מה אני משיג מהמצב הזה? לפעמים התשובה מפתיעה.", principle: "כל התנהגות תכליתית" },
+  { text: "תחושת הנחיתות אינה חולשה — היא המנוע של כל התפתחות אנושית. השאלה היא לאן אתה מפנה אותה.", principle: "תסביך הנחיתות כמנוע צמיחה" },
+  { text: "אנחנו לא סובלים מהעבר שלנו. אנחנו בוחרים להשתמש בו. ההיסטוריה אינה גזר דין.", principle: "חופש הבחירה ועצמאות מהעבר" },
+  { text: "הבעיה שאתה מתאר היא לרוב לא הבעיה האמיתית. חפש מה מתחת לפני השטח — שם מתחיל השינוי.", principle: "הקשב לנרטיב הנסתר" },
+  { text: "אורח החיים שלנו נקבע עד גיל חמש. אבל מה שנקבע — ניתן גם לשינוי. תמיד.", principle: "אורח חיים ניתן לשינוי" },
+  { text: "כשאנחנו מרגישים תקועים, זה בדרך כלל כי אנחנו שומרים על בטיחות ולא על אושר. אלה לא אותו דבר.", principle: "האומץ לצאת מהנוחות" },
+  { text: "תחושת השייכות היא צורך יסודי. כשמשהו כואב ביחסים — תסתכל מי מרגיש לא שייך.", principle: "Gemeinschaftsgefühl — תחושת שייכות חברתית" },
+  { text: "אנחנו לא נקבעים על ידי נסיבות, אלא על ידי הפירוש שאנחנו נותנים להן. שנה את הפירוש.", principle: "משמעות סובייקטיבית של מציאות" },
+  { text: "כל ילד מחפש מקום. כל מבוגר עדיין עושה את זה. הכאב שאתה מתאר — איפה הוא מחפש מקום?", principle: "שאיפה למשמעות ומקום" },
+  { text: "עידוד הוא הכלי החזק ביותר לשינוי. לא שבח, לא ביקורת — עידוד. יש הבדל.", principle: "עידוד כבסיס לצמיחה" },
+  { text: "מה שנראה כמו עקשנות הוא לרוב תחושת חוסר אונים. שנה את מסגרת הכוח — המצב ישתנה.", principle: "שאיפה לכוח ומשמעות" },
+  { text: "בריאות נפשית אמיתית נמדדת ביכולת לתרום לאחרים. שאל: כמה אני נותן היום?", principle: "עניין חברתי כמדד לבריאות" },
+  { text: "הסדר שבו נולדת במשפחה עיצב אותך יותר ממה שאתה חושב. הבכור, האמצעי, הצעיר — כולם מכירים.", principle: "השפעת סדר הלידה" },
+  { text: "אנחנו חיים לעבר יעדים דמיוניים. ה'אם רק הייתי...' שלך מסגיר מה אתה באמת רוצה.", principle: "יעד בדיוני — Fictional Finalism" },
+  { text: "הילד הפנימי שלך לא צריך ריפוי — הוא צריך להבין שהוא כבר לא לבד.", principle: "אחדות האישיות" },
+  { text: "כשמישהו מעצבן אותך, שאל מה הוא מנסה להשיג. לרוב זה אותו הדבר שאתה מנסה.", principle: "תכלית ההתנהגות החברתית" },
+  { text: "הפרפקציוניזם הוא לעתים קרובות אמתלה להימנע מלנסות. המושלם הוא אויב הטוב.", principle: "האומץ להיות לא מושלם" },
+  { text: "כשאנחנו מאשימים אחרים, אנחנו מוותרים על הכוח לשנות. האחריות היא המפתח.", principle: "אחריות אישית ואוטונומיה" },
+  { text: "לפעמים הסימפטום הוא הפתרון. תסתכל מה הבעיה הזו פותרת עבורך.", principle: "תפקיד הסימפטום" },
+  { text: "שאל לא 'מה קרה לי' אלא 'מה אני עושה עם מה שקרה'. זה ההבדל בין קורבן לגיבור.", principle: "עמדה אקטיבית כלפי החיים" },
+  { text: "הכוח האמיתי אינו שליטה על אחרים — הוא שליטה על עצמך. זה המקום היחיד שיש לך.", principle: "שאיפה לשלמות פנימית" },
+  { text: "כל קונפליקט עם אחר הוא גם דיאלוג עם עצמך. מה אתה אומר לעצמך דרך הסיטואציה הזו?", principle: "השלכה חברתית של הפנים" },
+  { text: "הצורך להוכיח את עצמך מגיע תמיד מאותו מקום — תחושה שאינך מספיק. אתה מספיק.", principle: "פיצוי על תחושת נחיתות" },
+  { text: "אמפתיה אמיתית פירושה לראות את העולם מעיני האחר. נסה זאת שלוש דקות — תופתע.", principle: "עניין חברתי ואמפתיה" },
+  { text: "השינוי לא מתחיל בהבנה — הוא מתחיל בהחלטה. ההבנה מגיעה אחרי.", principle: "קדימות הרצון על ההכרה" },
+  { text: "מה שאתה קורא 'גורל' הוא לרוב דפוס שבחרת בו פעם אחת ושכחת לבחון שוב.", principle: "אורח חיים כבחירה חוזרת" },
+  { text: "ילד שמתנהג רע מחפש שייכות בדרך שגויה. מבוגר שמתנהג רע — בדיוק אותו דבר.", principle: "מטרת ההתנהגות הבעייתית" },
+  { text: "הדרך היחידה לצאת מהבדידות היא לתרום. לא לקבל — לתת. נסה היום.", principle: "תרומה חברתית כתרופה לבדידות" },
+  { text: "אנחנו לא פחות מאחרים ולא יותר. כשאתה שוכח את זה לכל כיוון — הצרות מתחילות.", principle: "שוויון ערך אנושי" },
+  { text: "הבעיות הגדולות בחיים — עבודה, אהבה, חברה — כולן דורשות את אותו כלי: שיתוף פעולה.", principle: "שלושת משימות החיים" },
+  { text: "מה שאתה נמנע ממנו ביותר — שם בדיוק מחכה הצמיחה שלך.", principle: "האומץ להתמודד" },
+  { text: "לא ניתן לשנות אחרים. ניתן רק לשנות את עצמך — ולהתפלא כמה אחרים משתנים בתגובה.", principle: "השפעה דרך דוגמה אישית" },
+  { text: "כל אדם הוא יצירה אינדיבידואלית שלמה. הטעות היא לנסות להיות כמו מישהו אחר.", principle: "אינדיבידואליות ושלמות הנפש" },
+  { text: "הכאב שאתה מרגיש הוא מידע, לא עונש. מה הוא מנסה ללמד אותך?", principle: "פירוש תכליתי של רגשות" },
+  { text: "גם אם לא תשנה שום דבר מחוץ לך — שינוי בפרשנות שלך לחיים הוא שינוי של הכל.", principle: "כוח הנרטיב הפנימי" }
+];
 
-Core Adlerian principles to draw from:
-- Gemeinschaftsgefühl (תחושת שייכות חברתית) — we are social beings motivated by belonging
-- Striving for superiority/significance (שאיפה למשמעות ועליונות) — we all strive to overcome feelings of inferiority
-- Inferiority complex (תסביך נחיתות) — feelings of inadequacy can be a motor for growth or a trap
-- Fictional finalism (יעד בדיוני) — we live toward imagined goals that guide our behavior
-- Birth order (סדר לידה) — position in family shapes personality
-- Life style (אורח חיים) — each person has a unique pattern of relating to the world
-- Social interest (עניין חברתי) — mental health = contribution to others
-- Encouragement (עידוד) — courage is the key to change
-- "Everything can be different" — behavior is chosen, not fixed
-- Teleological view — behavior is purposeful, not just caused
+const KEYWORDS = [
+  { words: ['ילד','בן','בת','ילדים','מתנהג','צועק','בוכה','מסרב','כיתה','מורה'], indices: [6,9,26,8] },
+  { words: ['בוס','עבודה','מנהל','קריירה','משרד','פוטרתי','שכר','קולגה'], indices: [0,7,17,22] },
+  { words: ['אשה','בעל','זוגיות','נישואים','גירושין','זוג','אהבה','פרידה'], indices: [1,6,23,29] },
+  { words: ['תקוע','אבוד','לא יודע','בלבול','ספק','כיוון'], indices: [4,13,25,34] },
+  { words: ['כועס','עצבים','כעס','מתוסכל','מרגיז'], indices: [0,15,27] },
+  { words: ['עצוב','דיכאון','בודד','בדידות','ריק','חסר'], indices: [27,28,14,33] },
+  { words: ['חרד','פחד','דאגה','לחץ','סטרס'], indices: [16,5,20] },
+  { words: ['הורה','אמא','אבא','משפחה','אח','אחות'], indices: [12,8,14,26] },
+  { words: ['עצמי','בטחון','ערך','מספיק','מוכשר'], indices: [22,1,16,32] },
+];
 
-Respond ONLY in Hebrew. Be wise, warm, slightly poetic. 2-3 sentences + [עיקרון: ...]
-Do NOT be preachy or clinical. Speak like a wise elder who has seen it all.`;
+function pickResponse(text) {
+  let candidates = [];
+  for (const group of KEYWORDS) {
+    if (group.words.some(w => text.includes(w))) candidates.push(...group.indices);
+  }
+  candidates = [...new Set(candidates)];
+  if (!candidates.length) return RESPONSES[Math.floor(Math.random() * RESPONSES.length)];
+  return RESPONSES[candidates[Math.floor(Math.random() * candidates.length)]];
+}
 
-async function askAdler() {
+function askAdler() {
   const situation = document.getElementById('situation').value.trim();
-  if (!situation) {
-    showAnswer('ספר לי מה מטריד אותך...', '');
-    return;
-  }
+  if (!situation) { document.getElementById('situation').focus(); return; }
 
-  setLoading(true);
-
-  try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 300,
-        system: ADLER_SYSTEM,
-        messages: [{ role: "user", content: situation }]
-      })
-    });
-
-    const data = await response.json();
-    const fullText = data.content?.[0]?.text || '';
-    
-    // Split principle from main text
-    const principleMatch = fullText.match(/\[עיקרון:[^\]]+\]/);
-    const principle = principleMatch ? principleMatch[0].replace(/[\[\]]/g, '') : '';
-    const mainText = fullText.replace(/\[עיקרון:[^\]]+\]/, '').trim();
-
-    showAnswer(mainText, principle);
-  } catch (err) {
-    showAnswer('משהו השתבש. נסה שוב.', '');
-  }
-}
-
-function setLoading(on) {
-  const btn = document.getElementById('askBtn');
-  const dots = document.getElementById('loadingDots');
+  const wrap = document.getElementById('answerWrap');
   const content = document.getElementById('answerContent');
-  const bubble = document.getElementById('answerBubble');
+  const dots = document.getElementById('loadingDots');
+  const btn = document.getElementById('askBtn');
 
-  btn.disabled = on;
-  bubble.classList.add('visible');
+  const adlerImg = document.querySelector('.adler-img');
+  btn.disabled = true;
+  content.style.display = 'none';
+  dots.classList.add('active');
+  wrap.classList.add('visible');
+  adlerImg.classList.add('thinking');
 
-  if (on) {
-    content.style.display = 'none';
-    dots.classList.add('active');
-  } else {
-    dots.classList.remove('active');
-    content.style.display = 'block';
-  }
-}
-
-function showAnswer(text, principle) {
-  setLoading(false);
-  document.getElementById('answerText').textContent = text;
-  const pEl = document.getElementById('answerPrinciple');
-  pEl.textContent = principle;
-  pEl.style.display = principle ? 'block' : 'none';
-  document.getElementById('answerBubble').classList.add('visible');
-}
-
-function shakeBall() {
-  const wrap = document.getElementById('ballWrap');
-  const ball = document.getElementById('ball');
-  wrap.classList.remove('shaking');
-  void wrap.offsetWidth;
-  wrap.classList.add('shaking');
-  ball.classList.add('glowing');
   setTimeout(() => {
-    wrap.classList.remove('shaking');
-    ball.classList.remove('glowing');
-  }, 800);
+    const r = pickResponse(situation);
+    dots.classList.remove('active');
+    adlerImg.classList.remove('thinking');
+    content.style.display = 'block';
+    document.getElementById('answerText').textContent = r.text;
+    document.getElementById('answerPrinciple').textContent = r.principle;
+    btn.disabled = false;
+    wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 800 + Math.random() * 500);
 }
 
-// Show initial bubble
-document.getElementById('answerBubble').classList.add('visible');
+document.getElementById('situation').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.ctrlKey) askAdler();
+});
 </script>
 </body>
 </html>
