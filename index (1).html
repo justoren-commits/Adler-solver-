@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>אדלר אומר</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="אדלר אומר">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#f5ede0">
+
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700;900&family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+:root {
+  --bg: #f5ede0;
+  --cream: #fdf8f0;
+  --sage: #7a9e7e;
+  --sage-light: #a8c5ac;
+  --sage-dim: rgba(122,158,126,0.15);
+  --ink: #2c2c2c;
+  --ink-light: #6b6560;
+  --rust: #c0674a;
+  --border: rgba(44,44,44,0.15);
+}
+
+html, body { height: 100%; overscroll-behavior: none; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Heebo', sans-serif;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+}
+
+.app {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: max(40px, env(safe-area-inset-bottom));
+}
+
+/* ── HEADER ── */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  position: relative;
+}
+
+.adler-img {
+  width: 170px;
+  height: 170px;
+  object-fit: contain;
+  transform-origin: bottom center;
+  border-radius: 4px;
+}
+
+@keyframes think {
+  0%   { transform: rotate(0deg); }
+  15%  { transform: rotate(-7deg); }
+  35%  { transform: rotate(6deg); }
+  55%  { transform: rotate(-5deg); }
+  75%  { transform: rotate(3deg); }
+  90%  { transform: rotate(-1.5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.adler-img.thinking {
+  animation: think 0.8s ease-in-out infinite;
+}
+
+.header-text {
+  margin-top: 16px;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.header-text h1 {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.header-text h1 span {
+  color: var(--sage);
+}
+
+.header-text p {
+  font-size: 0.72rem;
+  color: var(--ink-light);
+  letter-spacing: 0.1em;
+  margin-top: 6px;
+  font-weight: 300;
+}
+
+.wiggle-hint {
+  font-size: 0.65rem;
+  color: var(--sage);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* divider */
+.divider {
+  width: calc(100% - 48px);
+  margin: 24px 24px 0;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── INPUT ── */
+.input-area {
+  padding: 24px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+
+textarea {
+  width: 100%;
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: var(--ink);
+  font-family: 'Heebo', sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  resize: none;
+  outline: none;
+  min-height: 100px;
+  direction: rtl;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  -webkit-appearance: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+textarea:focus {
+  border-color: var(--sage-light);
+  box-shadow: 0 0 0 3px var(--sage-dim);
+}
+
+textarea::placeholder { color: #bbb; }
+
+.ask-btn {
+  width: 100%;
+  background: var(--sage);
+  border: none;
+  border-radius: 12px;
+  padding: 16px 20px;
+  color: white;
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: background 0.2s, transform 0.12s;
+  -webkit-appearance: none;
+  box-shadow: 0 3px 12px rgba(122,158,126,0.35);
+}
+
+.ask-btn:active { transform: scale(0.97); background: #6a8e6e; }
+.ask-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* ── ANSWER ── */
+.answer-wrap {
+  padding: 20px 24px 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  pointer-events: none;
+}
+
+.answer-wrap.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.answer-card {
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.answer-header {
+  background: var(--sage-dim);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.answer-header-dot {
+  width: 8px; height: 8px;
+  background: var(--sage);
+  border-radius: 50%;
+}
+
+.answer-header span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+.answer-body { padding: 20px 18px 20px; }
+
+/* dots */
+.loading { display: none; justify-content: center; gap: 7px; padding: 10px 0; }
+.loading.active { display: flex; }
+.dot {
+  width: 8px; height: 8px;
+  background: var(--sage);
+  border-radius: 50%;
+  animation: pulse 1s infinite;
+}
+.dot:nth-child(2) { animation-delay: 0.18s; }
+.dot:nth-child(3) { animation-delay: 0.36s; }
+@keyframes pulse {
+  0%,80%,100% { transform: scale(0.55); opacity: 0.25; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.answer-content { display: none; }
+
+.answer-text {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 1.08rem;
+  font-weight: 400;
+  line-height: 1.9;
+  color: var(--ink);
+  direction: rtl;
+}
+
+.answer-principle {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 0.68rem;
+  color: var(--sage);
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* footer */
+.footer {
+  margin-top: auto;
+  padding: 28px 24px 0;
+  font-size: 0.6rem;
+  color: var(--ink-light);
+  opacity: 0.4;
+  text-align: center;
+  letter-spacing: 0.08em;
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="header">
+    <img class="adler-img" src="adler2.png" alt="אדלר" onerror="this.style.display='none'">
+    <div class="header-text">
+      <h1>אדלר <span>אומר</span></h1>
+      <p>פסיכולוגיה אינדיבידואלית · 1870–1937</p>
+      <div class="wiggle-hint">* הראש מתנדנד כשהוא חושב</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="input-area">
+    <div class="input-label">ספר לי מה קורה</div>
+    <textarea id="situation" placeholder="למשל: הילד שלי צועק בלי הפסקה, הבוס לא רואה אותי, אני תקוע..."></textarea>
+    <button class="ask-btn" id="askBtn" onclick="askAdler()">אדלר, מה אתה אומר?</button>
+  </div>
+
+  <div class="answer-wrap" id="answerWrap">
+    <div class="answer-card">
+      <div class="answer-header">
+        <div class="answer-header-dot"></div>
+        <span>אדלר אומר</span>
+      </div>
+      <div class="answer-body">
+        <div class="loading" id="loadingDots">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+        <div class="answer-content" id="answerContent">
+          <div class="answer-text" id="answerText"></div>
+          <div class="answer-principle" id="answerPrinciple"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">לא תחליף לטיפול אמיתי · אדלר עצמו היה אומר ללכת לפסיכולוג</div>
+
+</div>
+<script>
+const RESPONSES = [
+  {
+    text: "כל התנהגות היא בעלת מטרה — גם אם אנחנו לא מודעים לה. הילד שצועק, העובד שמאחר, בן הזוג שמתנתק — כולם מנסים להשיג משהו דרך ההתנהגות הזו. השאלה שאדלר היה שואל אינה 'למה הוא עושה את זה?' אלא 'מה הוא מנסה להשיג?' — ולפעמים התשובה מפתיעה אותנו לגמרי.",
+    principle: "כל התנהגות תכליתית"
+  },
+  {
+    text: "תחושת הנחיתות אינה חולשה — היא המנוע של כל התפתחות אנושית. אדלר האמין שכולנו נולדים עם תחושה שאנחנו קטנים וחלשים, ושכל חיינו אנחנו מנסים לפצות עליה. הבעיה לא בתחושה עצמה, אלא בכיוון שבו אנחנו מפנים אותה — לעבר שיתוף פעולה ותרומה, או לעבר שליטה ועוצמה שקרית.",
+    principle: "תסביך הנחיתות כמנוע צמיחה"
+  },
+  {
+    text: "אנחנו לא סובלים מהעבר שלנו — אנחנו בוחרים להשתמש בו. זה נשמע קשה, אבל זה גם מחזיר לך כוח: מה שקרה לך לא קובע מה תהיה. אדלר לא האמין בטראומה כגזר דין — הוא האמין שהפירוש שאנחנו נותנים לאירועים הוא שמעצב אותנו, לא האירועים עצמם.",
+    principle: "חופש הבחירה ועצמאות מהעבר"
+  },
+  {
+    text: "הבעיה שאתה מתאר היא לרוב לא הבעיה האמיתית. אנחנו נוטים להצביע על הסימפטום — הצעקות, הדיכאון, הקונפליקט — ולשכוח לשאול מה מסתתר מתחתיו. אדלר היה מבקש להבין מה מספר לך הסיפור הזה על עצמך, על מה אתה מאמין שמגיע לך, ואיזה עולם אתה מדמיין שחי בו.",
+    principle: "הקשב לנרטיב הנסתר"
+  },
+  {
+    text: "אורח החיים שלנו — כלומר הדרך הייחודית שלנו לראות את עצמנו ואת העולם — נקבע בשנות חיינו הראשונות. אבל אדלר לא היה פסימי בנוגע לכך: הוא האמין שברגע שאנחנו מבינים את הדפוס הזה, אנחנו יכולים לבחור לשנות אותו. ההבנה לבדה לא מספיקה — צריך גם אומץ.",
+    principle: "אורח חיים ניתן לשינוי"
+  },
+  {
+    text: "כשאנחנו מרגישים תקועים, זה בדרך כלל כי אנחנו שומרים על בטיחות במחיר האושר שלנו. אנחנו בונים לעצמנו 'תירוצים מועילים' — סיבות מדוע אנחנו לא יכולים לנסות, לשנות, להתקרב. אדלר היה אומר: הפחד מכישלון הוא לרוב גדול יותר מהכישלון עצמו, ולכן אנחנו לא מנסים.",
+    principle: "האומץ לצאת מהנוחות"
+  },
+  {
+    text: "תחושת השייכות — מה שאדלר קרא Gemeinschaftsgefühl — היא הצורך האנושי הבסיסי ביותר. כשמישהו מתנהג בצורה שמקשה עלינו, שאל תחילה: האם הוא מרגיש שייך? האם יש לו מקום בקבוצה הזו? ילדים שמפריעים בכיתה, עובדים שלא מתאמצים, בני זוג שמתרחקים — כולם לרוב מחפשים שייכות בדרכים עקיפות.",
+    principle: "Gemeinschaftsgefühl — תחושת שייכות חברתית"
+  },
+  {
+    text: "אנחנו לא נקבעים על ידי נסיבותינו, אלא על ידי הפירוש שאנחנו נותנים להן. שני אנשים יכולים לגדול בתנאים זהים ולצאת עם עולמות פנימיים שונים לחלוטין. אדלר ראה בכך בשורה — כי אם הפירוש הוא שלנו, אז גם הכוח לשנות אותו הוא שלנו.",
+    principle: "משמעות סובייקטיבית של מציאות"
+  },
+  {
+    text: "כל ילד, וכל מבוגר, מחפש את מקומו. כשהתנהגות של ילד מאתגרת אותנו, אדלר היה מציע להסתכל על המטרה שמאחוריה: האם הוא מחפש תשומת לב? כוח? נקמה? או שהוא פשוט ויתר ומרגיש שאין לו מקום? כל אחת מהמטרות הללו מצריכה תגובה שונה לחלוטין.",
+    principle: "ארבע מטרות ההתנהגות של הילד"
+  },
+  {
+    text: "עידוד הוא הכלי החזק ביותר שיש לנו ביחסים — הרבה יותר משבח, ביקורת, או תגמול. השבח אומר 'עשית טוב'. העידוד אומר 'אני מאמין בך גם כשאתה לא בשיאך'. אדלר ראה בעידוד תרופה כמעט אוניברסלית — לילדים, למבוגרים, לעצמנו.",
+    principle: "עידוד כבסיס לצמיחה"
+  },
+  {
+    text: "מה שנראה כמו עקשנות או עצלנות הוא לרוב ביטוי של תחושת חוסר אונים. כשאדם מרגיש שאין לו כוח להשפיע על מה שקורה לו, הוא לפעמים מוצא את הכוח היחיד שנשאר לו — לסרב. הבנה זו משנה את האופן שבו אנחנו מגיבים, ופותחת דלת לשיחה אחרת לגמרי.",
+    principle: "שאיפה לכוח ומשמעות"
+  },
+  {
+    text: "אדלר האמין שבריאות נפשית אמיתית נמדדת לפי מידת העניין החברתי שלנו — כלומר, כמה אנחנו מסוגלים לתרום, לשתף פעולה, ולהזדהות עם אחרים. האדם הנוירוטי, לפי אדלר, הוא בעיקרו אדם שהתרכז בעצמו מדי. הפתרון הוא לא תמיד לחפור פנימה — אלא לפנות החוצה.",
+    principle: "עניין חברתי כמדד לבריאות"
+  },
+  {
+    text: "הסדר שבו נולדת במשפחה עיצב אותך יותר ממה שאתה אולי חושב. הבכור שחושש לאבד את מקומו, האמצעי שחושב שאחיו קיבלו יותר ממנו, הצעיר שרגיל שעושים הכל בשבילו — כולם מכירים את הדינמיקה הזו. לא כגורל, אלא כנקודת מוצא שאפשר לזהות ולעבוד איתה.",
+    principle: "השפעת סדר הלידה"
+  },
+  {
+    text: "אנחנו חיים לעבר יעד דמיוני — תמונה פנימית של מה שאנחנו צריכים להיות כדי להרגיש שלמים. לפעמים היעד הזה הוא בריא: 'אני רוצה להיות אדם שתורם'. ולפעמים הוא הורס: 'אני חייב להיות מושלם כדי שיאהבו אותי'. ה'אם רק הייתי...' שלך מגלה לך את היעד הנסתר.",
+    principle: "יעד בדיוני — Fictional Finalism"
+  },
+  {
+    text: "אדלר האמין באחדות האישיות — שאין ניגוד אמיתי בין מה שאנחנו חושבים, מרגישים ועושים. כשאנחנו אומרים 'אני רוצה לשנות אבל לא מצליח' — אדלר היה אומר שהרצון הזה פשוט חלש יותר מרצון אחר, נסתר, לשמור על הדברים כמו שהם. שינוי מתחיל בזיהוי הרצון הנסתר הזה.",
+    principle: "אחדות האישיות"
+  },
+  {
+    text: "כשמישהו מעצבן אותך, הנטייה הטבעית היא להסביר את ההתנהגות שלו דרך האופי שלו. אדלר היה מציע משהו אחר: שאל מה המטרה של ההתנהגות הזו. לרוב תגלה שהוא מחפש בדיוק את מה שאתה מחפש — תשומת לב, כבוד, שייכות — רק בדרך שמפריעה לך.",
+    principle: "תכלית ההתנהגות החברתית"
+  },
+  {
+    text: "הפרפקציוניזם הוא לרוב לא שאיפה לטוב יותר — הוא הגנה מפני הכישלון. אם אני לא מנסה, אני לא יכול להיכשל. אם אני מנסה ולא מגיע לשלמות, יש לי תירוץ. אדלר היה אומר: האומץ להיות לא מושלם הוא תנאי בסיסי לחיים מלאים.",
+    principle: "האומץ להיות לא מושלם"
+  },
+  {
+    text: "כשאנחנו מאשימים אחרים — ההורים, הבוס, הגורל — אנחנו מרוויחים פטור מאחריות, אבל מאבדים את הכוח לשנות. אדלר לא האמין בתיאוריות שמחזקות את הקורבנות — הוא האמין שכל אחד, גם בנסיבות קשות, שומר על מרחב בחירה כלשהו. וזה המרחב שאפשר לעבוד איתו.",
+    principle: "אחריות אישית ואוטונומיה"
+  },
+  {
+    text: "לפעמים הסימפטום הוא הפתרון. כאב ראש שמופיע לפני כל ביקור משפחתי, חרדה שמכה לפני כל בחינה, עייפות שמונעת עימות — אלה לא רק בעיות, הן גם פתרונות שהמערכת מצאה לעצמה. לפני שמנסים לסלק את הסימפטום, כדאי להבין את הבעיה שהוא פותר.",
+    principle: "תפקיד הסימפטום"
+  },
+  {
+    text: "השאלה שאדלר היה שואל אינה 'מה קרה לך?' אלא 'מה אתה עושה עם מה שקרה?' ההבדל הוא לא סמנטי — הוא ההבדל בין עמדה פסיבית לעמדה אקטיבית כלפי החיים. הסבל שלך הוא אמיתי, אבל הכוח לפרש אותו ולנוע ממנו הוא שלך.",
+    principle: "עמדה אקטיבית כלפי החיים"
+  },
+  {
+    text: "הכוח האמיתי, לפי אדלר, אינו שליטה על אחרים — הוא שליטה על עצמך. כל ניסיון לשלוט באחרים הוא בעצם הודאה בחוסר אונים פנימי. כשאנחנו עסוקים בלשנות אחרים, אנחנו מחמיצים את המקום היחיד שבאמת יש לנו כוח בו.",
+    principle: "שאיפה לשלמות פנימית"
+  },
+  {
+    text: "כל קונפליקט עם אחר מכיל בתוכו גם דיאלוג פנימי. מה שמעצבן אותנו באחרים הוא לרוב משהו שאנחנו לא מקבלים בעצמנו — או משהו שאנחנו מפחדים להיות. אדלר היה אומר: תסתכל על מה שמרגיז אותך ביותר, ושם תמצא רמז לעצמך.",
+    principle: "השלכה חברתית של הפנים"
+  },
+  {
+    text: "הצורך להוכיח את עצמך — להיות הכי טוב, הכי חכם, הכי מוצלח — מגיע כמעט תמיד מאותו מקום: תחושה עמוקה שכמו שאתה, אתה לא מספיק. אדלר לא ביקש מאנשים להפסיק לשאוף — הוא ביקש מהם לשאוף מתוך שלמות עם עצמם, לא מתוך פחד.",
+    principle: "פיצוי על תחושת נחיתות"
+  },
+  {
+    text: "אמפתיה אמיתית, לפי אדלר, פירושה לראות את העולם מעיני האחר — לא להסכים איתו, לא לאשר את התנהגותו, אלא להבין את ההיגיון הפנימי שלו. זה קשה, כי זה מחייב אותנו לוותר זמנית על נקודת המבט שלנו. אבל מרגע שעושים את זה, כמעט כל קונפליקט נראה אחרת.",
+    principle: "עניין חברתי ואמפתיה"
+  },
+  {
+    text: "אדלר האמין שהשינוי לא מתחיל בהבנה — הוא מתחיל בהחלטה. אנשים יכולים להבין את עצמם שנים ולא לזוז. ואנשים אחרים מחליטים לשנות לפני שהם מבינים למה. ההבנה חשובה, אבל בלי האומץ לפעול לפיה — היא רק עוד סיפור יפה שאנחנו מספרים לעצמנו.",
+    principle: "קדימות הרצון על ההכרה"
+  },
+  {
+    text: "מה שאתה קורא 'גורל' או 'אופי' הוא לרוב דפוס שהחלטת עליו פעם אחת, בגיל מאוד צעיר, ומאז הפסקת לבדוק אותו. אדלר קרא לזה 'אורח חיים' — הדרך הייחודית שלנו לראות את העולם ולנוע בו. הבשורה היא שמה שנבחר — ניתן לבחור מחדש.",
+    principle: "אורח חיים כבחירה חוזרת"
+  },
+  {
+    text: "ילד שמתנהג בצורה שמקשה עלינו — בין אם הוא צועק, מסרב, מפריע, או שוקע בשקט — הוא לרוב ילד שלא מצא דרך לגיטימית להרגיש שייך ובעל ערך. עונש יפסיק את ההתנהגות, אבל לא יפתור את הצורך שמאחוריה. השאלה היא איך לעזור לו למצוא את מקומו בדרך שתועיל לכולם.",
+    principle: "מטרת ההתנהגות הבעייתית"
+  },
+  {
+    text: "הבדידות, לפי אדלר, היא לרוב תוצאה של ריכוז יתר בעצמנו. הפרדוקס הוא שהדרך לצאת ממנה אינה לחפש יותר חיבורים — אלא לתרום יותר. כשאנחנו שואלים 'מה אני יכול לתת?' במקום 'מה אני יכול לקבל?' — המפגשים משתנים, והבדידות נסוגה.",
+    principle: "תרומה חברתית כתרופה לבדידות"
+  },
+  {
+    text: "אדלר האמין בשוויון ערך מוחלט בין בני אדם — לא שוויון יכולות, אלא שוויון ערך אנושי. כשאנחנו מרגישים מעל לאחרים אנחנו מפסידים את היכולת לשתף פעולה. כשאנחנו מרגישים מתחתיהם אנחנו מפסידים את הביטחון לפעול. הנקודה הבריאה היא הסתכלות אופקית — לצד, לא למעלה ולמטה.",
+    principle: "שוויון ערך אנושי"
+  },
+  {
+    text: "אדלר זיהה שלושה תחומים עיקריים שבהם החיים דורשים מאיתנו תשובה: עבודה, אהבה וחברה. הבעיות שלנו מתרכזות כמעט תמיד באחד מהם. והפתרון, כמעט תמיד, עובר דרך אותו כלי: האומץ להתחבר, לתרום, ולשתף פעולה — גם כשזה מפחיד.",
+    principle: "שלושת משימות החיים"
+  },
+  {
+    text: "מה שאנחנו נמנעים ממנו ביותר הוא לרוב בדיוק מה שאנחנו הכי צריכים לעשות. ההימנעות מגינה עלינו בטווח הקצר — אבל מחזקת את הפחד בטווח הארוך. אדלר היה אומר: הדרך היחידה דרך פחד היא דרכו, ולא מסביבו.",
+    principle: "האומץ להתמודד"
+  },
+  {
+    text: "לא ניתן לשנות אחרים — ואנשים שמנסים לעשות זאת מתסכלים את עצמם ואת הסביבה. אבל כשאנחנו משנים את עצמנו — את הטון, את הציפיות, את האופן שבו אנחנו מגיבים — הסביבה לרוב מגיבה. לא תמיד, לא בטוח, לא מיד. אבל זה המקום היחיד שיש לנו מנוף אמיתי.",
+    principle: "השפעה דרך דוגמה אישית"
+  },
+  {
+    text: "כל אדם הוא יצירה אינדיבידואלית שלמה — זה הבסיס של הפסיכולוגיה האינדיבידואלית. אנחנו לא סכום של תכונות, לא תוצאה של גנים וחינוך, ולא עותק של אף אחד אחר. הניסיון להיות כמו מישהו אחר הוא בעיקרו הכחשה של מה שאתה. וזה הפסד כפול — גם שלך, גם של העולם.",
+    principle: "אינדיבידואליות ושלמות הנפש"
+  },
+  {
+    text: "הכאב שאתה מרגיש הוא מידע, לא עונש. הוא מנסה לומר לך משהו על מה חסר, על מה נפגע, על מה נדרש. אדלר לא עודד להתעלם מכאב — הוא עודד להקשיב לו בסקרנות במקום בפחד. כשאנחנו שואלים 'מה הכאב הזה מנסה להגיד לי?' — התשובה לפעמים מפתיעה.",
+    principle: "פירוש תכליתי של רגשות"
+  },
+  {
+    text: "גם אם לא תשנה שום דבר בנסיבות החיצוניות שלך — שינוי בפרשנות שלך לחיים הוא שינוי של הכל. אדלר האמין שהמציאות הסובייקטיבית חזקה מהמציאות האובייקטיבית: לא מה שקרה, אלא מה שאתה מספר לעצמך על מה שקרה — זה שמעצב את חייך.",
+    principle: "כוח הנרטיב הפנימי"
+  }
+];
+
+const KEYWORDS = [
+  { words: ['ילד','בן','בת','ילדים','מתנהג','צועק','בוכה','מסרב','כיתה','מורה','התפרצות'], indices: [6,8,9,26] },
+  { words: ['בוס','עבודה','מנהל','קריירה','משרד','פוטרתי','שכר','קולגה','ממנו'], indices: [0,7,17,22] },
+  { words: ['אשה','בעל','זוגיות','נישואים','גירושין','זוג','אהבה','פרידה','יחסים'], indices: [1,6,22,29] },
+  { words: ['תקוע','אבוד','לא יודע','בלבול','ספק','כיוון','משמעות'], indices: [4,13,24,34] },
+  { words: ['כועס','עצבים','כעס','מתוסכל','מרגיז','מעצבן'], indices: [0,15,21] },
+  { words: ['עצוב','דיכאון','בודד','בדידות','ריק','חסר','עצמי'], indices: [27,14,23,33] },
+  { words: ['חרד','פחד','דאגה','לחץ','סטרס','חרדה'], indices: [16,5,30] },
+  { words: ['הורה','אמא','אבא','משפחה','אח','אחות','אחים','ילדות'], indices: [12,3,14,26] },
+  { words: ['עצמי','בטחון','ערך','מספיק','מוכשר','להוכיח'], indices: [22,1,16,32] },
+  { words: ['שינוי','לשנות','לצאת','להתקדם','קדימה'], indices: [4,17,24,31] },
+  { words: ['בריאות','חולה','כאב','גוף','עייפות'], indices: [18,19,33] },
+];
+
+function pickResponse(text) {
+  let candidates = [];
+  for (const group of KEYWORDS) {
+    if (group.words.some(w => text.includes(w))) candidates.push(...group.indices);
+  }
+  candidates = [...new Set(candidates)];
+  if (!candidates.length) return RESPONSES[Math.floor(Math.random() * RESPONSES.length)];
+  return RESPONSES[candidates[Math.floor(Math.random() * candidates.length)]];
+}
+
+function askAdler() {
+  const situation = document.getElementById('situation').value.trim();
+  if (!situation) { document.getElementById('situation').focus(); return; }
+
+  const wrap = document.getElementById('answerWrap');
+  const content = document.getElementById('answerContent');
+  const dots = document.getElementById('loadingDots');
+  const btn = document.getElementById('askBtn');
+  const img = document.querySelector('.adler-img');
+
+  btn.disabled = true;
+  content.style.display = 'none';
+  dots.classList.add('active');
+  wrap.classList.add('visible');
+  img.classList.add('thinking');
+
+  setTimeout(() => {
+    const r = pickResponse(situation);
+    dots.classList.remove('active');
+    img.classList.remove('thinking');
+    content.style.display = 'block';
+    document.getElementById('answerText').textContent = r.text;
+    document.getElementById('answerPrinciple').textContent = r.principle;
+    btn.disabled = false;
+    wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 1200 + Math.random() * 600);
+}
+
+document.getElementById('situation').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.ctrlKey) askAdler();
+});
+</script>
+</body>
+</html>
